@@ -1,0 +1,10 @@
+[project]
+name = "ocract"
+version = "0.1.0"
+description = "App for reading text from images and pdfs of documents"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pyside6>=6.11.0",
+    "pytesseract>=0.3.13",
+]
