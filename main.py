@@ -1,6 +1,11 @@
-def main():
-    print("Hello from ocract!")
-
+import sys
+from PySide6.QtWidgets import QApplication
+from ui_main import MainWindow
 
 if __name__ == "__main__":
-    main()
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    window.show()
+
+    sys.exit(app.exec())
