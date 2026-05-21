@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog, QH
 from .drop_zone_widget import DropZoneWidget
 from .text_editor_widget import TextEditorWidget
 from ocr_service import run_ocr
+from pathlib import Path
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -42,7 +43,7 @@ class MainWindow(QWidget):
 
     def on_image_selected(self, path: str):
         self.image_path = path
-        self.drop_zone.set_message(f"Wybrano: {path}")
+        self.drop_zone.set_message(f"Wybrano: {Path(path).name}")
 
     def on_message(self, text: str):
         self.drop_zone.set_message(text)
