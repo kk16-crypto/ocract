@@ -1,0 +1,26 @@
+QWidget
+{
+    background-color: #000000;
+}
+
+QLabel
+{
+    color: #FFFFFF;
+    background-color: #01171E;
+    qproperty-alignment: AlignCenter;
+}
+
+QTextEdit
+{
+    color: #FFFFFF;
+    background-color: #01171E;
+}
+
+QPushButton
+{
+    color: #000000;
+    background-color: #229FFF;
+    padding: 20px;
+    font-size: 18px;
+}
+
