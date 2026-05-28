@@ -1,0 +1,7 @@
+TESSERACT_CONFIG = [
+    "stdout --oem 3 --psm 8 -c tessedit_char_whitelist=0123456789.,",
+]
+DEFAULT_TARGET_COLOR = (0, 0, 0)
+DEFAULT_TOLERANCE = 10
+DEFAULT_SCALE = [3.45, 3.41]
+DEFAULT_PADDING = 15
