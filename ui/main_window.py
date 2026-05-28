@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog, QHBoxLayout
 from .drop_zone_widget import DropZoneWidget
 from .text_editor_widget import TextEditorWidget
-from ocr_service import run_ocr
+from .pipeline import run_ocr
 from pathlib import Path
 
 class MainWindow(QWidget):
@@ -27,7 +27,7 @@ class MainWindow(QWidget):
         self.btn_save = QPushButton("Zapisz do .txt")
 
         self.btn_choose.clicked.connect(self.drop_zone.open_file_dialog)
-        self.btn_ocr.clicked.connect(self.run_ocr)
+        self.btn_ocr.clicked.connect(self.pipeline)
         self.btn_save.clicked.connect(self.save_file)
 
         self.drop_zone.file_selected.connect(self.on_image_selected)
