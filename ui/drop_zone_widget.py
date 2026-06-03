@@ -55,8 +55,7 @@ class DropZoneWidget(QWidget):
         path = urls[0].toLocalFile()
 
         if path.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".tiff")):
-            filename = Path(path).name
-            self.file_selected.emit(filename)
+            self.file_selected.emit(path)
             event.acceptProposedAction()
         else:
             self.invalid_file_selected.emit("Nieobsługiwany format")

@@ -1,4 +1,4 @@
-TESSERACT_CONFIG = "stdout --oem 3 --psm 8 -c tessedit_char_whitelist=0123456789.,",
+TESSERACT_CONFIG = "stdout --oem 3 --psm 8 -c tessedit_char_whitelist=0123456789.,"
 
 DEFAULT_TARGET_COLOR = (200, 200, 200)
 DEFAULT_TOLERANCE = 10
