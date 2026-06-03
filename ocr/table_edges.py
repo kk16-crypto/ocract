@@ -4,7 +4,7 @@ from typing import Tuple
 
 import cv2
 import numpy as np
-from config import DEFAULT_TARGET_COLOR
+from .config import DEFAULT_TARGET_COLOR
 
 
 SEPARATOR = np.array(DEFAULT_TARGET_COLOR, dtype=np.int16)
