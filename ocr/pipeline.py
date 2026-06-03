@@ -4,8 +4,9 @@ from typing import Dict, List, Tuple
 import numpy as np
 import cv2
 from PIL import Image
-
-from .pipeline import detect_table_columns
+import pytesseract
+import traceback
+from .table_edges import detect_table_columns, detect_table_rows
 
 
 # config
@@ -13,33 +14,22 @@ from .config import (
     TESSERACT_CONFIG,
     DEFAULT_TARGET_COLOR,
     DEFAULT_TOLERANCE,
-    DEFAULT_SCALE,
-    TABLE_KEYS,
 )
 
 # setup
-from .paths import configure_tesseract
+# from .paths import configure_tesseract
 
 # geometry / crops
 from .crops import (
     build_crop_boxes,
-    save_crop_image,
+
 )
 
 #  OCR / processing
 from .recognition import (
-    recognize_cells,
-    normalize_decimal_lines,
     extract_ocr_lines,
 )
 from .preprocessing import preprocess_crop_for_ocr
-
-# external detection (detekcja struktury tabeli)
-from table_edges import (
-    detect_table_last_row_by_color,
-    detect_table_columns_by_color,
-    detect_row_segments_from_column,
-)
 
 
 
@@ -71,11 +61,31 @@ def run_ocr(
 
     try:
         img = Image.open(image_path)
-        text = pytesseract.image_to_string(img, lang="eng+pol")
-        return text.strip()
-    except Exception as e:
-        return f"[OCR ERROR] {str(e)}"
+    
+        points = detect_table_columns(image_path, target_color)
 
+        last_row = detect_table_rows(image_path, target_color, col_num=-1)
+
+        crop_boxes = build_crop_boxes(points, last_row, len(points))
+
+        col_crop = img.crop(crop_boxes[0])
+
+        col_np_arr = np.array(col_crop)
+        col_raw = cv2.cvtColor(col_np_arr, cv2.COLOR_RGB2BGR)
+
+        prep_crop = preprocess_crop_for_ocr(col_np_arr)
+        text = extract_ocr_lines(
+            prep_crop,
+            TESSERACT_CONFIG,
+        )
+        # text = pytesseract.image_to_string(img, config=TESSERACT_CONFIG)
+
+        print(f"text:------------------ {text}")
+        return text
+    except Exception as e:
+        print(traceback.format_exc())
+        return f"[OCR ERROR] {str(e)}"
+        
 
     # # 1. Detekcja struktury tabeli (kolumny + ostatni wiersz)
     # points = detect_table_columns_by_color(
@@ -122,7 +132,7 @@ def run_ocr(
     #                     prep_crop,
     #                     config,
     #                 )
-                
+
     #         elif key == TABLE_KEYS[0]:
     #             # Kolumny tabelaryczne – OCR per komórka
     #             col_arr = recognize_cells(
