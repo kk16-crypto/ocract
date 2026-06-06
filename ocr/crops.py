@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 
 def build_crop_boxes(
-    points: List[int], last_row: int | None, col_num: int
+    points: List[int], first_row: int, last_row: int, col_num: int
 ) -> List[Tuple[int, int, int, int]]:
     """
     Buduje bounding boxy (crop boxes) dla kolumn tabeli na podstawie
@@ -27,7 +27,7 @@ def build_crop_boxes(
 
     result = []
 
-    for i in range(col_num-1):
-        result.append((points[i], 0, points[i + 1], last_row))
-        
+    for i in range(col_num - 1):
+        result.append((points[i], first_row, points[i + 1], last_row))
+
     return result
