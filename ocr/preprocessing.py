@@ -1,11 +1,13 @@
 import cv2
 import numpy as np
 
+from .config import DEFAULT_SCALE, DEFAULT_PADDING
+
 
 def preprocess_crop_for_ocr(
     img: np.ndarray,
-    scale: float = 3.41,
-    padding: int = 12,
+    scale: float = DEFAULT_SCALE,
+    padding: int = DEFAULT_PADDING,
 ) -> np.ndarray:
     """
     Wykonuje preprocessing obrazu w celu poprawy jakości OCR.
