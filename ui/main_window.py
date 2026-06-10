@@ -9,7 +9,7 @@ class MainWindow(QWidget):
         super().__init__()
         self.setWindowTitle("OCR App MVP")
         self.setMinimumSize(800, 600)
-        self.image_path = "z:\Downloads\ocr-img3.png"
+        self.image_path = ""
         self._build_ui()
 
     def _build_ui(self):
