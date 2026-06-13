@@ -1,6 +1,5 @@
-# table_edges.py
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, List
 
 import cv2
 import numpy as np
@@ -14,9 +13,9 @@ def _find_color_segments(
     pixels: np.ndarray,
     color: np.ndarray,
     tolerance: int = 10,
-) -> list[tuple[int, int]]:
+) -> List[Tuple[int, int]]:
     """
-    pixels: shape (N, 3)
+    Zwraca indeksy pikseli, które pasują do zadanego koloru w tolerancji.
     """
 
     diff = np.abs(pixels.astype(np.int16) - color)
@@ -30,9 +29,9 @@ def _find_color_segments(
 def detect_table_columns(
     image_path: str | Path,
     target_color: Tuple[int, int, int],
-    col_num: int | None = None,
+    segment_idx: int | None = None,
     tolerance: int = 10,
-) -> Tuple[list[int], int | None]:
+) -> Tuple[List[int], int | None]:
     image = cv2.imread(str(image_path))
 
     if image is None:
@@ -40,18 +39,20 @@ def detect_table_columns(
 
     sample_row_y = image.shape[0] // 2
 
-    if col_num is None:
+    if segment_idx is None:
         return _find_color_segments(image[sample_row_y], target_color, tolerance)
 
-    return _find_color_segments(image[sample_row_y], target_color, tolerance)[col_num]
+    return _find_color_segments(image[sample_row_y], target_color, tolerance)[
+        segment_idx
+    ]
 
 
 def detect_table_rows(
     image_path: str | Path,
     target_color: Tuple[int, int, int],
-    col_num: int | None = None,
+    segment_idx: int | None = None,
     tolerance: int = 10,
-) -> Tuple[list[int], int | None]:
+) -> Tuple[List[int], int | None]:
     image = cv2.imread(str(image_path))
 
     if image is None:
@@ -59,9 +60,9 @@ def detect_table_rows(
 
     sample_row_x = image.shape[1] // 2
 
-    if col_num is None:
+    if segment_idx is None:
         return _find_color_segments(image[:, sample_row_x], target_color, tolerance)
 
     return _find_color_segments(image[:, sample_row_x], target_color, tolerance)[
-        col_num
+        segment_idx
     ]
