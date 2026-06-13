@@ -10,6 +10,9 @@ class TextEditorWidget(QWidget):
 
     def _build_ui(self):
         layout = QVBoxLayout()
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        
         self.text_edit = QTextEdit()
         self.text_edit.textChanged.connect(self._on_text_changed)
         layout.addWidget(self.text_edit)

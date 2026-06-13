@@ -13,13 +13,12 @@ class DropZoneWidget(QWidget):
 
     def _build_ui(self):
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
 
         self.label = QLabel("Przeciągnij obraz lub wybierz plik")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setMinimumHeight(180)
-        self.label.setStyleSheet(
-            "border: 1px dashed gray; padding: 20px; background: gray; color: white;"
-        )
 
         layout.addWidget(self.label)
         self.setLayout(layout)

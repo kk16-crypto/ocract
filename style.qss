@@ -8,19 +8,24 @@ QLabel
     color: #FFFFFF;
     background-color: #01171E;
     qproperty-alignment: AlignCenter;
+    border-radius: 4px;
+    margin: 10px;
 }
 
 QTextEdit
 {
     color: #FFFFFF;
     background-color: #01171E;
+    margin: 10px;
 }
 
 QPushButton
 {
     color: #000000;
     background-color: #229FFF;
-    padding: 20px;
     font-size: 18px;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
 }
 

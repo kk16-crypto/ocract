@@ -34,6 +34,10 @@ class MainWindow(QWidget):
         self.drop_zone.invalid_file_selected.connect(self.on_message)
         self.text_editor.text_changed.connect(self.on_text_changed)
 
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(10)
+        btn_layout.setSpacing(10)
+
         layout.addWidget(self.drop_zone)
         layout.addLayout(btn_layout)
         layout.addWidget(self.text_editor)
