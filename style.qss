@@ -6,7 +6,7 @@ QWidget
 QLabel
 {
     color: #FFFFFF;
-    background-color: #01171E;
+    background-color: #3e4142;
     qproperty-alignment: AlignCenter;
     border-radius: 4px;
     margin: 10px;
@@ -15,7 +15,7 @@ QLabel
 QTextEdit
 {
     color: #FFFFFF;
-    background-color: #01171E;
+    background-color: #3e4142;
     margin: 10px;
 }
 

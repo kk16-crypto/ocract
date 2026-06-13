@@ -1,6 +1,5 @@
 from PySide6.QtWidgets import QWidget, QLabel, QFileDialog, QVBoxLayout
 from PySide6.QtCore import Qt, Signal
-from pathlib import Path
 
 class DropZoneWidget(QWidget):
     file_selected = Signal(str)
@@ -31,7 +30,7 @@ class DropZoneWidget(QWidget):
             self,
             "Wybierz obraz",
             "",
-            "Images (*.png *.jpg *.jpeg *.bmp *.tiff)"
+            "Images (*.png *.jpg *.jpeg)"
         )
         if path:
             self.file_selected.emit(path)
@@ -53,7 +52,7 @@ class DropZoneWidget(QWidget):
 
         path = urls[0].toLocalFile()
 
-        if path.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".tiff")):
+        if path.lower().endswith((".png", ".jpg", ".jpeg")):
             self.file_selected.emit(path)
             event.acceptProposedAction()
         else:
