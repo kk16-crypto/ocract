@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Tuple
 import numpy as np
 from PIL import Image
 import traceback
@@ -19,11 +19,15 @@ def run_ocr(
     image_path: str | Path,
     target_color: Tuple[int, int, int] = DEFAULT_TARGET_COLOR,
     tolerance: int = DEFAULT_TOLERANCE,
-) -> Dict[str, List[str]]:
+) -> str:
+    """
+    Odczytuje tabelę z obrazu i zwraca tekst w formacie wierszy rozdzielonych tabami.
+    """
 
     try:
         img = Image.open(image_path)
 
+        # Wyznaczamy granice kolumn i zakres wierszy tabeli
         points = detect_table_columns(image_path, target_color)
         last_row = detect_table_rows(image_path, target_color, col_num=-1)
         first_row = detect_table_rows(image_path, target_color, col_num=1)
@@ -43,6 +47,7 @@ def run_ocr(
             columns.append(lines)
             max_rows = max(max_rows, len(lines))
 
+        # Składamy kolumny w wiersze, żeby wynik dało się wkleić do pola tekstowego jako tabela
         rows = []
         for i in range(max_rows):
             row = []
