@@ -29,8 +29,8 @@ def run_ocr(
 
         # Wyznaczamy granice kolumn i zakres wierszy tabeli
         points = detect_table_columns(image_path, target_color)
-        last_row = detect_table_rows(image_path, target_color, col_num=-1)
-        first_row = detect_table_rows(image_path, target_color, col_num=1)
+        last_row = detect_table_rows(image_path, target_color, -1)
+        first_row = detect_table_rows(image_path, target_color, 1)
 
         crop_boxes = build_crop_boxes(points, first_row, last_row, len(points))
 
