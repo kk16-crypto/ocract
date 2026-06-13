@@ -7,7 +7,7 @@ from pathlib import Path
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("OCR App MVP")
+        self.setWindowTitle("OCRact")
         self.setMinimumSize(800, 600)
         self.image_path = ""
         self._build_ui()
